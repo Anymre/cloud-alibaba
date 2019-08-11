@@ -9,11 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>config</module>
+        <module>consumer</module>
+        <module>discovery</module>
+        <module>feign</module>
     </modules>
 
     <properties>
         <spring-boot.version>2.1.7.RELEASE</spring-boot.version>
-        <spring-cloud.version>Greenwich SR2</spring-cloud.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -61,6 +64,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
     </dependencies>
 

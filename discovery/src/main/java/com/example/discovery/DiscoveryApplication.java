@@ -1,5 +1,7 @@
 package com.example.discovery;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,9 +18,12 @@ public class DiscoveryApplication {
     }
     @RestController
     public class EchoController {
+        @Value("${server.port}")
+        private String port;
         @GetMapping(value = "/echo/{string}")
-        public String echo(@PathVariable String string) {
-            return "Hello Nacos Discovery " + string;
+        @SentinelResource("/echo/{string}")
+        public String echo(@PathVariable String string) throws InterruptedException {
+            return "Hello Nacos Discovery " + string + " i am from port " + port;
         }
     }
 
