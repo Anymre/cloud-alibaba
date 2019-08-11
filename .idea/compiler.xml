@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="consumer" />
-        <module name="feign" />
-        <module name="config" />
-        <module name="dependencies" />
         <module name="discovery" />
+        <module name="config" />
+        <module name="gateway" />
+        <module name="feign" />
+        <module name="dependencies" />
+        <module name="consumer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +20,7 @@
       <module name="dependencies" target="1.8" />
       <module name="discovery" target="1.8" />
       <module name="feign" target="1.8" />
+      <module name="gateway" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

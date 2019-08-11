@@ -12,6 +12,7 @@
         <module>consumer</module>
         <module>discovery</module>
         <module>feign</module>
+        <module>gateway</module>
     </modules>
 
     <properties>
