@@ -15,20 +15,20 @@ class InitServiceImpl implements InitService {
     int scale
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    StringRedisTemplate stringRedisTemplate
 
     @Autowired
-    ObjectMapper objectMapper;
+    ObjectMapper objectMapper
 
     @Override
     String perform(Strategy strategy) {
         def world = createWorld()
         strategy.perform(world)
-        def res = new HashMap();
+        def res = new HashMap()
         res.put("data", world)
         res.put("scale", this.scale)
         String message = objectMapper.writeValueAsString(res)
-        stringRedisTemplate.convertAndSend("aol", message)
+        stringRedisTemplate.opsForValue().set("aol", message)
         return message
     }
 

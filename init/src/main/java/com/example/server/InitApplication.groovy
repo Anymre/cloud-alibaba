@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ServerApplication {
+class InitApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ServerApplication.class, args);
+    static void main(String[] args) {
+        SpringApplication.run(InitApplication.class, args);
     }
 
     @Bean

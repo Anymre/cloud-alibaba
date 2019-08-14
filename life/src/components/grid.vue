@@ -34,7 +34,7 @@
                 var that = this
                 this.$axios.get("/api/init/init").then(function (r) {
                     that.life = r.data.data
-                    that.scale = r.data.scale
+                    that.scale  = r.data.scale
                 })
             },
             initLocal() {

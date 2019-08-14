@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="evolution" />
         <module name="gateway" />
         <module name="dependencies" />
         <module name="init" />
@@ -16,6 +17,7 @@
       <module name="consumer" target="1.8" />
       <module name="dependencies" target="1.8" />
       <module name="discovery" target="1.8" />
+      <module name="evolution" target="1.8" />
       <module name="feign" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="init" target="1.8" />
