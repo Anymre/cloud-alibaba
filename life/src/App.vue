@@ -24,6 +24,5 @@
         margin:0 auto;
     }
     #grid{
-        margin-top: 5%;
     }
 </style>
