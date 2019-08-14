@@ -9,7 +9,7 @@
             </row>
         </template>
         <Button type="success" @click="next" ghost>Next</Button>
-        <Button type="warning" @click="init" ghost>Clear</Button>
+        <Button type="warning" @click="initLocal" ghost>Clear</Button>
         <Button type="warning" @click="start" ghost>Start</Button>
     </div>
 </template>
@@ -21,8 +21,8 @@
         name: 'grid',
         data() {
             return {
-                life: [[]],
-                scale: 20,
+                life: [],
+                scale: 12,
                 off: 0
             }
         },
@@ -31,6 +31,13 @@
         },
         methods: {
             init() {
+                var that = this
+                this.$axios.get("/api/init/init").then(function (r) {
+                    that.life = r.data.data
+                    that.scale = r.data.scale
+                })
+            },
+            initLocal() {
                 let scale = this.scale;
                 let final = new Array(scale);
                 for (let i = 0; i < scale; i++) {
