@@ -29,8 +29,10 @@
         data() {
             return {
                 life: [],
-                scale: 12,
-                off: 0
+                scale: 24,
+                off: 0,
+                width: 36,
+                height: 18,
             }
         },
         created: function () {
@@ -42,7 +44,9 @@
                 this.$axios.get("/api/init/init").then(function (r) {
                     that.life = r.data
                     that.scale = that.life.length
-                })
+                    that.width = that.life[0].length
+                    that.height = that.life.length
+                }).catch(that.initLocal)
             },
             remote_next() {
                 var that = this
@@ -56,9 +60,9 @@
             initLocal() {
                 let scale = this.scale;
                 let final = new Array(scale);
-                for (let i = 0; i < scale; i++) {
-                    let col = new Array(scale);
-                    for (let j = 0; j < scale; j++) {
+                for (let i = 0; i < this.height; i++) {
+                    let col = new Array(this.width);
+                    for (let j = 0; j < this.width; j++) {
                         col[j] = {now: 0, next: 0}
                     }
                     final[i] = col
@@ -73,8 +77,8 @@
                 }
             },
             next() {
-                for (let i = 1; i < this.scale - 1; i++) {
-                    for (let j = 1; j < this.scale - 1; j++) {
+                for (let i = 1; i < this.height - 1; i++) {
+                    for (let j = 1; j < this.width - 1; j++) {
                         this.cell(i, j)
                     }
                 }
@@ -84,8 +88,8 @@
                 let around = 0;
                 for (let i = 0; i < 3; i++) {
                     for (let j = 0; j < 3; j++) {
-                        if (x > 0 && x + 1 < this.scale) {
-                            if (y > 0 && y + 1 < this.scale) {
+                        if (x > 0 && x + 1 < this.height) {
+                            if (y > 0 && y + 1 < this.width) {
                                 around += this.life[x - 1 + i][y - 1 + j].now;
                             }
                         }
@@ -103,8 +107,8 @@
             }
             ,
             update() {
-                for (let x = 0; x < this.scale; x++) {
-                    for (let y = 0; y < this.scale; y++) {
+                for (let x = 0; x < this.height; x++) {
+                    for (let y = 0; y < this.width; y++) {
                         this.life[x][y].now = this.life[x][y].next
                     }
                 }
