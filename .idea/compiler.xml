@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="evolution" />
+        <module name="inevitable" />
         <module name="gateway" />
         <module name="dependencies" />
         <module name="init" />
@@ -20,6 +21,7 @@
       <module name="evolution" target="1.8" />
       <module name="feign" target="1.8" />
       <module name="gateway" target="1.8" />
+      <module name="inevitable" target="1.8" />
       <module name="init" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -11,6 +11,7 @@
         <module>init</module>
         <module>gateway</module>
         <module>evolution</module>
+        <module>inevitable</module>
     </modules>
 
     <properties>

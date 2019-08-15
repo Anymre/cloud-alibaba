@@ -8,9 +8,16 @@
                 </template>
             </row>
         </template>
-        <Button type="success" @click="next" ghost>Next</Button>
-        <Button type="warning" @click="initLocal" ghost>Clear</Button>
-        <Button type="warning" @click="start" ghost>Start</Button>
+        <row>
+            <Button type="success" @click="next" ghost>Next</Button>
+            <Button type="warning" @click="initLocal" ghost>Clear</Button>
+            <Button type="warning" @click="start" ghost>Start</Button>
+        </row>
+        <row>
+            <Button type="success" @click="remote_next">Next</Button>
+            <Button type="warning" @click="init">Clear</Button>
+            <Button type="warning" @click="remote_start">Start</Button>
+        </row>
     </div>
 </template>
 
@@ -34,8 +41,17 @@
                 var that = this
                 this.$axios.get("/api/init/init").then(function (r) {
                     that.life = r.data
-                    that.scale  = r.data.size()
-                })  
+                    that.scale = that.life.length
+                })
+            },
+            remote_next() {
+                var that = this
+                this.axios.get("/api/evolution/evolution").then(function (r) {
+                    that.life = r.data
+                })
+            },
+            remote_start() {
+                setInterval(this.remote_next, 100);
             },
             initLocal() {
                 let scale = this.scale;
@@ -97,7 +113,8 @@
             ,
             start() {
                 setInterval(this.next, 100);
-            }
+            },
+
         }
     }
 </script>
