@@ -11,7 +11,7 @@ class EvolutionController {
     EvolutionService evolutionService;
 
     @GetMapping("/evolution")
-    init() {
+    List init() {
         return evolutionService.perform()
     }
 }

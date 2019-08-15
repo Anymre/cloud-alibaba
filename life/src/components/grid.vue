@@ -33,9 +33,9 @@
             init() {
                 var that = this
                 this.$axios.get("/api/init/init").then(function (r) {
-                    that.life = r.data.data
-                    that.scale  = r.data.scale
-                })
+                    that.life = r.data
+                    that.scale  = r.data.size()
+                })  
             },
             initLocal() {
                 let scale = this.scale;
@@ -68,8 +68,8 @@
                 let around = 0;
                 for (let i = 0; i < 3; i++) {
                     for (let j = 0; j < 3; j++) {
-                        if (x > 0 && x + 1 <= this.scale) {
-                            if (y > 0 && y + 1 <= this.scale) {
+                        if (x > 0 && x + 1 < this.scale) {
+                            if (y > 0 && y + 1 < this.scale) {
                                 around += this.life[x - 1 + i][y - 1 + j].now;
                             }
                         }

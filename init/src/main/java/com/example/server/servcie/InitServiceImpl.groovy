@@ -24,12 +24,9 @@ class InitServiceImpl implements InitService {
     String perform(Strategy strategy) {
         def world = createWorld()
         strategy.perform(world)
-        def res = new HashMap()
-        res.put("data", world)
-        res.put("scale", this.scale)
-        String message = objectMapper.writeValueAsString(res)
-        stringRedisTemplate.opsForValue().set("aol", message)
-        return message
+        String mes=objectMapper.writeValueAsString(world)
+        stringRedisTemplate.opsForValue().set("aol", mes)
+        return mes
     }
 
     List createWorld() {
