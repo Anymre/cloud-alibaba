@@ -19,10 +19,22 @@ class InevitableServiceImpl implements InevitableService {
         String message = stringRedisTemplate.opsForValue().get("aol")
         List<List<Map>> life = objectMapper.readValue(message, List.class)
         for (int i = 0; i < life.size(); i++) {
-            for (int j = 0; j < life.size(); j++) {
+            for (int j = 0; j < life.get(0).size(); j++) {
                 life[i][j].now = life[i][j].next
             }
         }
+        stringRedisTemplate.opsForValue().set("aol", objectMapper.writeValueAsString(life))
+    }
+
+    @Override
+    void storm(Object x, Object y) {
+        int i=Integer.valueOf(x)
+        int j=Integer.valueOf(y)
+        String message = stringRedisTemplate.opsForValue().get("aol")
+        List<List<Map>> life = objectMapper.readValue(message, List.class)
+        if (life.get(i).get(j).now == 1)
+            life.get(i).get(j).now = 0
+        else life.get(i).get(j).now = 1
         stringRedisTemplate.opsForValue().set("aol", objectMapper.writeValueAsString(life))
     }
 }

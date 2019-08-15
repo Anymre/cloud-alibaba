@@ -21,21 +21,21 @@ class EvolutionServiceImpl implements EvolutionService {
     @Override
     void perform() {
         String message = stringRedisTemplate.opsForValue().get("aol")
-        List<List<Map>> life=objectMapper.readValue(message,List.class)
+        List<List<Map>> life = objectMapper.readValue(message, List.class)
         for (int i = 0; i < life.size(); i++) {
-            for (int j = 0; j < life.size(); j++) {
-                cell(life, i, j, life.size())
+            for (int j = 0; j < life.get(0).size(); j++) {
+                cell(life, i, j)
             }
         }
         stringRedisTemplate.opsForValue().set("aol", objectMapper.writeValueAsString(life))
     }
 
-    void cell(life, x, y, scale) {
+    void cell(life, x, y) {
         int around = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (x > 0 && x + 1 < scale) {
-                    if (y > 0 && y + 1 < scale) {
+                if (x > 0 && x + 1 < life.size()) {
+                    if (y > 0 && y + 1 < life.get(0).size()) {
                         around += life[x - 1 + i][y - 1 + j].now
                     }
                 }
@@ -51,6 +51,7 @@ class EvolutionServiceImpl implements EvolutionService {
         if (around == 3)
             life[x][y].next = 1
     }
+
     class State {
         int now = 0
         int next = 0

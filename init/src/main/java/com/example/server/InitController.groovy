@@ -1,6 +1,7 @@
 package com.example.server
 
 import com.example.server.servcie.InitService
+import com.example.server.strategy.GunStrategy
 import com.example.server.strategy.TumblerStrategy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,6 +14,6 @@ class InitController {
 
     @GetMapping("/init")
     init() {
-        return initService.perform(new TumblerStrategy())
+        return initService.perform(new GunStrategy())
     }
 }

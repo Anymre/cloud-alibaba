@@ -3,20 +3,15 @@
         <template v-for="(i,j) in life">
             <row v-bind:key="j">
                 <template v-for="(c,x) in i">
-                    <!--<Button :type="c?'info':''" v-bind:key="x"></Button>-->
-                    <Button class="fig" :class=" c.now?'info':''" v-bind:key="x" @click="flip(j,x)"></Button>
+                    <Button class="fig" :class=" c.now?'info':''" v-bind:key="x" @click="remote_flip(j,x)"></Button>
                 </template>
             </row>
         </template>
         <row>
-            <Button type="success" @click="next" ghost>Next</Button>
-            <Button type="warning" @click="initLocal" ghost>Clear</Button>
-            <Button type="warning" @click="start" ghost>Start</Button>
-        </row>
-        <row>
             <Button type="success" @click="remote_next">Next</Button>
             <Button type="warning" @click="init">Clear</Button>
             <Button type="warning" @click="remote_start">Start</Button>
+            <Button loading shape="circle" v-if="loading"></Button>
         </row>
     </div>
 </template>
@@ -29,10 +24,13 @@
         data() {
             return {
                 life: [],
+                loading: false,
                 scale: 24,
                 off: 0,
                 width: 36,
                 height: 18,
+                speed: 100,
+                timer: null
             }
         },
         created: function () {
@@ -55,8 +53,12 @@
                 })
             },
             remote_start() {
-                setInterval(this.remote_next, 100);
-            },
+                this.loading=!this.loading
+                if (this.loading) {
+                    this.timer=setInterval(this.remote_next, this.speed)
+                }else{
+                    clearInterval(this.timer)
+                }},
             initLocal() {
                 let scale = this.scale;
                 let final = new Array(scale);
@@ -75,6 +77,9 @@
                 } else {
                     Vue.set(this.life[x], y, {now: 0, next: 0})
                 }
+            },
+            remote_flip(x, y) {
+                this.axios.get("/api/inevitable/storm/" + x + "/" + y)
             },
             next() {
                 for (let i = 1; i < this.height - 1; i++) {
@@ -126,13 +131,13 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .fig {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
 
     .info {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         background: red;
     }
 </style>

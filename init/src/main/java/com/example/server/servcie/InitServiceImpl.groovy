@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service
 @Service
 @RefreshScope
 class InitServiceImpl implements InitService {
-    @Value("\${life.scale}")
-    int scale
+    @Value("\${life.width}")
+    int width
+
+    @Value("\${life.height}")
+    int height
 
     @Autowired
     StringRedisTemplate stringRedisTemplate
@@ -31,9 +34,9 @@ class InitServiceImpl implements InitService {
 
     List createWorld() {
         List<List<State>> world = new ArrayList()
-        for (int i = 0; i < scale; i++) {
+        for (int i = 0; i < height; i++) {
             List<State> col = new ArrayList()
-            for (int j = 0; j < scale; j++) {
+            for (int j = 0; j < width; j++) {
                 col.add(new State())
             }
             world.add(col)
