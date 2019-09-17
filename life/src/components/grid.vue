@@ -3,7 +3,7 @@
         <template v-for="(i,j) in life">
             <row v-bind:key="j">
                 <template v-for="(c,x) in i">
-                    <Button class="fig" :class=" c.now?'info':''" v-bind:key="x" @click="remote_flip(j,x)"></Button>
+                    <Button class="fig" size="small" :class=" c.now?'info':''" v-bind:key="x" @click="remote_flip(j,x)"></Button>
                 </template>
             </row>
         </template>
