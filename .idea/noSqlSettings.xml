@@ -5,8 +5,8 @@
       <list>
         <ServerConfiguration>
           <option name="databaseVendor" value="DatabaseVendor{name='RedisDB'}" />
-          <option name="label" value="local" />
-          <option name="serverUrl" value="localhost:6379" />
+          <option name="label" value="server" />
+          <option name="serverUrl" value="server.anymre.top:6379" />
         </ServerConfiguration>
       </list>
     </option>

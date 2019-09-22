@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "iview": "^3.0.1",
+    "iview": "^3.5.1",
+    "sockjs-client": "^1.4.0",
+    "stompjs": "^2.3.3",
     "vue": "^2.6.10"
   },
   "devDependencies": {
